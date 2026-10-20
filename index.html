@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chúc Mừng 20/10 Các Bạn Nữ Lớp CNTT.B 🌸💻</title>
+  <!-- Google Fonts hỗ trợ đầy đủ tiếng Việt -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Dancing+Script:wght@600;700&family=JetBrains+Mono:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Canvas hiệu ứng cánh hoa rơi -->
+  <canvas id="petal-canvas" aria-hidden="true"></canvas>
+
+  <!-- Thanh điều khiển góc trên -->
+  <div class="floating-controls">
+    <button id="music-toggle" class="icon-btn" title="Bật / Tắt giai điệu" aria-label="Bật hoặc tắt nhạc nền">
+      <span class="music-icon" id="music-icon">🎵</span>
+      <span class="btn-label" id="music-label">Giai điệu</span>
+    </button>
+    <button id="customize-toggle" class="icon-btn" title="Tuỳ chỉnh nội dung & phần thưởng" aria-label="Tuỳ chỉnh">
+      <span>⚙️</span>
+      <span class="btn-label">Tuỳ chỉnh</span>
+    </button>
+  </div>
+
+  <!-- MÀN HÌNH MỞ ĐẦU: PHONG THƯ + TERMINAL DEPLOY -->
+  <section id="intro-screen" class="intro-screen">
+    <div class="intro-glow"></div>
+    <div class="envelope-wrapper" id="open-envelope-btn" role="button" tabindex="0" aria-label="Mở thiệp 20/10 lớp CNTT.B">
+      <div class="floating-badge">
+        <code>git push origin 20-10-cntt-b --with-love 💖</code>
+      </div>
+
+      <div class="envelope" id="envelope">
+        <div class="envelope-flap"></div>
+        <div class="envelope-pocket"></div>
+        <div class="envelope-letter-preview">
+          <p class="preview-to">Gửi những bông hoa xinh đẹp nhất của</p>
+          <h2 class="preview-name">Lớp CNTT.B</h2>
+          <p class="preview-date">Happy Vietnamese Women's Day • 20/10</p>
+        </div>
+        <div class="wax-seal">
+          <span>🌸</span>
+        </div>
+      </div>
+
+      <p class="tap-hint">Chạm vào phong thư để mở kho trò chơi & lời chúc 20/10 nha! 💌✨</p>
+    </div>
+  </section>
+
+  <!-- NỘI DUNG CHÍNH -->
+  <main id="main-content" class="main-content hidden">
+    <!-- HERO SECTION -->
+    <header class="hero-section">
+      <div class="date-pill">
+        <span>🌸</span>
+        <span id="display-occasion">Happy Vietnamese Women's Day • 20/10 • CNTT.B</span>
+        <span>💻</span>
+      </div>
+
+      <p class="hero-subtitle">Gửi tới hội chị em "đỉnh nóc kịch trần" của</p>
+      <h1 class="hero-title" id="display-recipient">Các Bạn Nữ Lớp CNTT.B</h1>
+
+      <p class="hero-lead">
+        Giữa hàng ngàn dòng code khô khan, chính các bạn nữ <strong>CNTT.B</strong> là những sắc màu rực rỡ, dịu dàng và tuyệt vời nhất làm cả lớp mình luôn tràn ngập tiếng cười!
+      </p>
+
+      <!-- Thanh điều hướng nhanh tới các trò chơi -->
+      <div class="quick-nav">
+        <a href="#letter-section" class="nav-chip">💌 Tâm thư & Code</a>
+        <a href="#scanner-section" class="nav-chip">🔮 Máy Quét Nhan Sắc AI</a>
+        <a href="#wheel-section" class="nav-chip">🎡 Vòng Quay 20/10</a>
+        <a href="#blindbox-section" class="nav-chip">🎁 Khui Túi Mù</a>
+        <a href="#game-section" class="nav-chip">🎮 Game Hứng Quà Né Bug</a>
+      </div>
+
+      <div class="hero-actions">
+        <button id="send-flowers-btn" class="primary-btn">
+          <span>💐 Bắn Hoa & Trà Sữa Cho CNTT.B</span>
+          <span class="flower-counter" id="flower-counter">0</span>
+        </button>
+      </div>
+      <p class="combo-rank" id="combo-rank-text">✨ Hãy bấm nút trên để gửi thật nhiều hoa cho các bạn nữ CNTT.B!</p>
+    </header>
+
+    <!-- 1. TÂM THƯ (CHẾ ĐỘ VĂN THƠ & CHẾ ĐỘ CODE IT) -->
+    <section id="letter-section" class="section-container">
+      <div class="letter-card">
+        <div class="letter-mode-tabs">
+          <button id="tab-normal-btn" class="mode-tab active">💌 Chế độ Tâm Thư</button>
+          <button id="tab-code-btn" class="mode-tab">💻 Chế độ Code IT</button>
+        </div>
+
+        <!-- Nội dung tâm thư thường -->
+        <div id="letter-normal-view">
+          <div class="letter-decor-top">
+            <span>🌷</span>
+            <span class="letter-line"></span>
+            <span>Ngày 20 tháng 10 • Tập thể CNTT.B</span>
+            <span class="letter-line"></span>
+            <span>🌷</span>
+          </div>
+
+          <h2 class="letter-greeting">Gửi các bạn nữ đáng yêu của lớp CNTT.B,</h2>
+
+          <div class="letter-body" id="letter-body">
+            <p>
+              Người ta hay bảo con gái học Công nghệ thông tin là khô khan, nhưng nhìn vào <strong>hội chị em lớp CNTT.B</strong> thì định kiến đó hoàn toàn "bay màu"! Các bạn vừa xinh xắn, năng động, thông minh lại vừa nhiệt tình hết nấc trong mọi hoạt động của lớp.
+            </p>
+            <p>
+              Nhân ngày Phụ nữ Việt Nam 20/10, thay mặt toàn thể anh em trong lớp, chúc các bạn nữ <strong>CNTT.B</strong> luôn rạng rỡ như hoa hướng dương, học môn nào cũng qua môn <strong>A+</strong> nhẹ tênh, viết code chạy mượt ngay từ lần <code>Run</code> đầu tiên và chẳng bao giờ gặp <code>Bug</code> lúc nửa đêm!
+            </p>
+            <p>
+              Chúc chị em hôm nay nhận được thật nhiều hoa, quà, trà sữa full topping và luôn giữ mãi nụ cười tươi tắn nhất dưới mái nhà chung <strong>CNTT.B</strong> nhé!
+            </p>
+          </div>
+        </div>
+
+        <!-- Nội dung chế độ Code IT -->
+        <div id="letter-code-view" class="hidden">
+          <div class="code-window">
+            <div class="code-header">
+              <div class="code-dots">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+              <span class="code-filename">chuc_mung_20_10_cntt_b.js</span>
+              <button id="run-code-btn" class="run-code-btn">▶ Run Code</button>
+            </div>
+            <pre class="code-content"><code><span class="kw">const</span> <span class="fn">lopHoc</span> = <span class="str">"CNTT.B"</span>;
+<span class="kw">const</span> <span class="fn">ngayLe</span> = <span class="str">"20/10 - Ngày Phụ Nữ Việt Nam"</span>;
+
+<span class="kw">function</span> <span class="fn">chucMungChiEm</span>(danhSachNuCNTT_B) {
+  <span class="kw">return</span> danhSachNuCNTT_B.<span class="fn">map</span>(banNu => ({
+    ten: banNu,
+    doXinhDep: <span class="num">Infinity</span>,
+    diemGPA: <span class="num">4.0</span>,
+    soLuongBug: <span class="num">0</span>,
+    traSuaFullTopping: <span class="kw">true</span>,
+    loiChuc: <span class="str">"Luôn vui vẻ, rạng rỡ và hạnh phúc mỗi ngày! 💖"</span>
+  }));
+}
+
+<span class="cm">// Thực thi lời chúc cho toàn bộ nữ sinh CNTT.B</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"🚀 Deploying 1000% yêu thương tới hội chị em CNTT.B..."</span>);</code></pre>
+            <div id="code-output" class="code-output hidden"></div>
+          </div>
+        </div>
+
+        <div class="letter-footer">
+          <div class="letter-stamp">
+            <div class="stamp-inner">CNTT.B<br/>100% Love</div>
+          </div>
+          <div class="letter-signature">
+            <p class="sig-label">Thân gửi từ,</p>
+            <p class="sig-name" id="display-sender">Hội Con Trai Lớp CNTT.B ❤️</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. TRÒ CHƠI #1: MÁY QUÉT NHAN SẮC & ĐỘ ĐÁNG YÊU AI -->
+    <section id="scanner-section" class="section-container">
+      <div class="section-header">
+        <span class="section-tag">🔮 Trò chơi #1 • Công nghệ AI độc quyền CNTT.B</span>
+        <h2 class="section-title">Máy Quét Chỉ Số 20/10 & Danh Hiệu</h2>
+        <p class="section-desc">Nhập tên một bạn nữ CNTT.B vào đây để hệ thống phân tích độ xinh đẹp & cấp danh hiệu 20/10!</p>
+      </div>
+
+      <div class="interactive-card scanner-card">
+        <div class="scanner-input-row">
+          <input
+            type="text"
+            id="scanner-name-input"
+            placeholder="Nhập tên bạn nữ lớp CNTT.B (VD: Lan Anh, Minh Thư, Thảo...)"
+            maxlength="45"
+          />
+          <button id="scanner-btn" class="primary-btn">🔍 Quét Ngay</button>
+        </div>
+
+        <div id="scanner-loading" class="scanner-loading hidden">
+          <div class="progress-bar-wrap">
+            <div id="scanner-progress" class="progress-bar-fill"></div>
+          </div>
+          <p id="scanner-status-text" class="scanner-status">Đang khởi động cảm biến nhan sắc CNTT.B...</p>
+        </div>
+
+        <div id="scanner-result" class="scanner-result hidden">
+          <div class="result-badge-top">✨ KẾT QUẢ PHÂN TÍCH TỪ SERVER CNTT.B ✨</div>
+          <h3 id="res-girl-name" class="res-girl-name">Bạn nữ CNTT.B</h3>
+          <div id="res-title-badge" class="res-title-badge">👑 Nữ Thần Fix Bug</div>
+
+          <div class="stats-grid">
+            <div class="stat-box">
+              <span class="stat-label">🌸 Độ xinh đẹp</span>
+              <span class="stat-val" id="res-beauty">1000%</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">💻 Tỉ lệ Code 0 Bug</span>
+              <span class="stat-val" id="res-code">99.9%</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">🧋 Độ ngọt ngào</span>
+              <span class="stat-val" id="res-sweet">Full Topping</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">🍀 Vận may học kỳ này</span>
+              <span class="stat-val" id="res-luck">Auto A+</span>
+            </div>
+          </div>
+
+          <p id="res-personal-wish" class="res-personal-wish"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. TRÒ CHƠI #2: VÒNG QUAY NHÂN PHẨM 20/10 -->
+    <section id="wheel-section" class="section-container">
+      <div class="section-header">
+        <span class="section-tag">🎡 Trò chơi #2 • Thử vận may hôm nay</span>
+        <h2 class="section-title">Vòng Quay Nhân Phẩm 20/10 — CNTT.B</h2>
+        <p class="section-desc">Quay liền tay xem hôm nay chị em CNTT.B nhận được đặc quyền hay phần quà gì nào!</p>
+      </div>
+
+      <div class="interactive-card wheel-card">
+        <div class="wheel-container">
+          <div class="wheel-pointer">▼</div>
+          <canvas id="wheel-canvas" width="340" height="340"></canvas>
+        </div>
+
+        <div class="wheel-controls">
+          <button id="spin-wheel-btn" class="primary-btn spin-btn">🎰 Quay Ngay Cho Nóng!</button>
+          <div id="wheel-result-box" class="wheel-result-box">
+            Bấm nút <strong>Quay Ngay</strong> để xem món quà 20/10 của bạn! 🎁
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. TRÒ CHƠI #3: KHUI TÚI MÙ 20/10 (BLIND BOXES) -->
+    <section id="blindbox-section" class="section-container">
+      <div class="section-header">
+        <span class="section-tag">🎁 Trò chơi #3 • Blind Box Nhân Phẩm</span>
+        <h2 class="section-title">Khui Túi Mù Bùa May Mắn CNTT.B</h2>
+        <p class="section-desc">Chạm vào bất kỳ chiếc túi mù nào để khui "Secret" may mắn dành cho các bạn nữ lớp mình!</p>
+      </div>
+
+      <div class="blindbox-grid" id="blindbox-grid">
+        <!-- Được tạo tự động bằng JS kèm nút Reset -->
+      </div>
+      <div class="center-action">
+        <button id="reset-blindbox-btn" class="secondary-btn">🔄 Trộn lại túi mù mới</button>
+      </div>
+    </section>
+
+    <!-- 5. TRÒ CHƠI #4: MINI-GAME HỨNG QUÀ 20/10 & NÉ BUG -->
+    <section id="game-section" class="section-container">
+      <div class="section-header">
+        <span class="section-tag">🎮 Trò chơi #4 • Arcade Mini-Game</span>
+        <h2 class="section-title">Chiến Thần CNTT.B: Hứng Quà 20/10 — Né Bug Đỏ</h2>
+        <p class="section-desc">
+          Di chuyển chuột (hoặc chạm kéo trên điện thoại) để hứng <strong>💐 Hoa, 🧋 Trà sữa, 🎁 Quà, 🅰️ Điểm A+</strong> và né mấy con <strong>🐛 Bug / ⏰ Deadline</strong> nhé!
+        </p>
+      </div>
+
+      <div class="interactive-card arcade-card">
+        <div class="arcade-hud">
+          <div class="hud-item">🏆 Điểm: <strong id="game-score">0</strong></div>
+          <div class="hud-item">⏱️ Thời gian: <strong id="game-time">25</strong>s</div>
+          <div class="hud-item">🥇 Kỷ lục: <strong id="game-best">0</strong></div>
+        </div>
+
+        <div class="arcade-stage-wrap">
+          <canvas id="arcade-canvas" width="600" height="340"></canvas>
+          <div id="arcade-overlay" class="arcade-overlay">
+            <div class="arcade-overlay-content">
+              <div class="arcade-big-icon" id="arcade-icon">🎮</div>
+              <h3 id="arcade-title">Sẵn sàng săn quà 20/10 chưa?</h3>
+              <p id="arcade-subtitle">Hứng hoa & trà sữa (+10 đến +30 điểm), tránh Bug 🐛 (-15 điểm) trong 25 giây!</p>
+              <button id="start-game-btn" class="primary-btn">▶ Bắt Đầu Chơi Ngay</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. TRÒ CHƠI #5: CÂU HỎI CHỐT ĐƠN CUỐI TRANG -->
+    <section class="section-container">
+      <div class="question-card">
+        <div class="question-badge">💞 Khảo sát chất lượng phục vụ 20/10</div>
+        <h2 class="question-title">
+          Các bạn nữ CNTT.B thấy hội con trai lớp mình hôm nay có tâm lý, ga-lăng và xứng đáng 10 điểm không? 😎
+        </h2>
+        <p class="question-sub">Khảo sát hoàn toàn khách quan (nhưng chỉ nhận đáp án đúng)!</p>
+
+        <div class="question-buttons" id="question-buttons-area">
+          <button id="yes-love-btn" class="yes-btn">10 điểm không có nhưng! 💖</button>
+          <button id="no-love-btn" class="no-btn">Cho 1 điểm về chỗ 😜</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Made with 💖 & <code>0 Bugs</code> dành tặng riêng cho <strong>Các Bạn Nữ Lớp CNTT.B</strong> nhân ngày 20/10!</p>
+    </footer>
+  </main>
+
+  <!-- MODAL CHÚC MỪNG KHI BẤM "10 ĐIỂM KHÔNG CÓ NHƯNG" -->
+  <div id="celebration-modal" class="modal-overlay hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-big-heart">👑💐</div>
+      <h2 class="modal-title">Tuyệt vời quá! Mãi yêu hội chị em CNTT.B!</h2>
+      <p class="modal-text">
+        Chúc toàn thể các bạn nữ lớp <strong>CNTT.B</strong> một ngày 20/10 thật bùng nổ niềm vui, ngập tràn hoa quà, học tập đỉnh cao và mãi là thanh xuân rực rỡ nhất của đại gia đình <strong>CNTT.B</strong>! 🥰🎉
+      </p>
+      <button id="close-modal-btn" class="primary-btn">Tung hoa ăn mừng thôi! 🎊</button>
+    </div>
+  </div>
+
+  <!-- MODAL TUỲ CHỈNH NỘI DUNG & VÒNG QUAY -->
+  <div id="customize-modal" class="modal-overlay hidden" role="dialog" aria-modal="true">
+    <div class="modal-card customize-card">
+      <h3 class="customize-title">⚙️ Tuỳ chỉnh trang 20/10 Lớp CNTT.B</h3>
+      <p class="customize-sub">Bạn có thể chỉnh sửa chữ ký, lời chúc hoặc danh sách phần thưởng trên Vòng Quay:</p>
+
+      <div class="form-group">
+        <label for="input-sender">Chữ ký tập thể gửi tặng:</label>
+        <input type="text" id="input-sender" value="Hội Con Trai Lớp CNTT.B ❤️" />
+      </div>
+
+      <div class="form-group">
+        <label for="input-wheel-items">Các ô phần thưởng trên Vòng Quay (mỗi dòng 1 phần thưởng):</label>
+        <textarea id="input-wheel-items" rows="6"></textarea>
+      </div>
+
+      <div class="customize-actions">
+        <button id="save-custom-btn" class="primary-btn">Lưu thay đổi 💖</button>
+        <button id="cancel-custom-btn" class="secondary-btn">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
